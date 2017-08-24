@@ -20,21 +20,31 @@ function test(){
     var textUni = "Unicode snowman ☃";
     var text140Uni = "☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃" +
       "☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃☃";
+    var textReasonable = "This is probably a reasonable tweet 😄. #reasonable http://microblock.org";
+
+    assert(instance.length(text140) == 140, "length method is broken");
+    assert(instance.length(text141) == 141, "length method is broken");
+    assert(instance.length(textUni) == 17, "length method is broken");
+    assert(instance.length(text140Uni) == 140, "length method is broken");
+    assert(instance.length(textReasonable) == 72, "length method is broken");
 
     var txPublished = instance.publishText.sendTransaction(text140, {from: account, gas: 200000});
     var txPublished2 = instance.publishText.sendTransaction(text141, {from: account, gas: 200000});
     var txPublished3 = instance.publishText.sendTransaction(textUni, {from: account, gas: 200000});
     var txPublished4 = instance.publishText.sendTransaction(text140Uni, {from: account, gas: 200000});
+    var txPublished5 = instance.publishText.sendTransaction(textReasonable, {from: account, gas: 200000});
     sleep(2);
     var rcPublished = eth.getTransactionReceipt(txPublished);
     var rcPublished2 = eth.getTransactionReceipt(txPublished2);
     var rcPublished3 = eth.getTransactionReceipt(txPublished3);
     var rcPublished4 = eth.getTransactionReceipt(txPublished4);
+    var rcPublished5 = eth.getTransactionReceipt(txPublished5);
 
-    assert(rcPublished.gasUsed == 53279, "used gas changed to " + rcPublished.gasUsed);
+    assert(rcPublished.gasUsed == 53222, "used gas changed to " + rcPublished.gasUsed);
     assert(rcPublished2.gasUsed == 200000, "used gas changed to " + rcPublished2.gasUsed);
-    assert(rcPublished3.gasUsed == 27642, "used gas changed to " + rcPublished3.gasUsed);
-    assert(rcPublished4.gasUsed == 84374, "used gas changed to " + rcPublished4.gasUsed);
+    assert(rcPublished3.gasUsed == 27585, "used gas changed to " + rcPublished3.gasUsed);
+    assert(rcPublished4.gasUsed == 84317, "used gas changed to " + rcPublished4.gasUsed);
+    assert(rcPublished5.gasUsed == 39232, "used gas changed to " + rcPublished5.gasUsed);
   }
 
   // unlock account
