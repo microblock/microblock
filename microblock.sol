@@ -4,29 +4,7 @@ contract Microblock {
   event TextPublished(string text);
 
   function publishText(string text) public {
-    // this is duplicated from length method below to save some gas.
-    uint ptr;
-    assembly { ptr := add(text, 0x1) }
-    var end = ptr + bytes(text).length;
-    for (uint count = 0; ptr < end; count++) {
-      uint8 b;
-      assembly { b := and(mload(ptr), 0xFF) }
-      if (b < 0x80) {
-        ptr += 1;
-      } else if(b < 0xE0) {
-        ptr += 2;
-      } else if(b < 0xF0) {
-        ptr += 3;
-      } else if(b < 0xF8) {
-        ptr += 4;
-      } else if(b < 0xFC) {
-        ptr += 5;
-      } else {
-        ptr += 6;
-      }
-    }
-    require(count <= 140);
-
+    require(length(text) <= 140);
     TextPublished(text);
   }
 

@@ -40,11 +40,11 @@ function test(){
     var rcPublished4 = eth.getTransactionReceipt(txPublished4);
     var rcPublished5 = eth.getTransactionReceipt(txPublished5);
 
-    assert(rcPublished.gasUsed == 53222, "used gas changed to " + rcPublished.gasUsed);
+    assert(rcPublished.gasUsed == 53266, "used gas changed to " + rcPublished.gasUsed);
     assert(rcPublished2.gasUsed == 200000, "used gas changed to " + rcPublished2.gasUsed);
-    assert(rcPublished3.gasUsed == 27585, "used gas changed to " + rcPublished3.gasUsed);
-    assert(rcPublished4.gasUsed == 84317, "used gas changed to " + rcPublished4.gasUsed);
-    assert(rcPublished5.gasUsed == 39232, "used gas changed to " + rcPublished5.gasUsed);
+    assert(rcPublished3.gasUsed == 27629, "used gas changed to " + rcPublished3.gasUsed);
+    assert(rcPublished4.gasUsed == 84361, "used gas changed to " + rcPublished4.gasUsed);
+    assert(rcPublished5.gasUsed == 39276, "used gas changed to " + rcPublished5.gasUsed);
   }
 
   // unlock account
